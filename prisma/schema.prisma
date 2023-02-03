@@ -8,3 +8,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Courses {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  description String?
+  duration    Int
+  created_at  DateTime         @default(now())
+
+  @@map("courses")
+}
+
+
