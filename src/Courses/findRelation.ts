@@ -6,10 +6,11 @@ async function main() {
   const result = await prisma.courses.findMany({
     include: {
       teacher: true,
+      modules: true,
     },
   });
 
-  console.log(result);
+  console.log(JSON.stringify(result, null, 2));
 }
 
 main();

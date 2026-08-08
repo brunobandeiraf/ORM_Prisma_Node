@@ -7,14 +7,13 @@ async function main() {
     data: {
       name: "Machado de Assis",
       Books: {
-        createMany: {
-          data: [
-            { name: "Dom Casmurro" },
-            { name: "Memórias Póstumas de Brás Cubas" },
-          ],
-        },
+        create: [
+          { name: "Dom Casmurro" },
+          { name: "Memórias Póstumas de Brás Cubas" },
+        ],
       },
     },
+    include: { Books: true },
   });
 
   console.log(result);

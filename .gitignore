@@ -122,6 +122,10 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+# SQLite database
+prisma/dev.db
+prisma/dev.db-journal
+
 # yarn v2
 .yarn/cache
 .yarn/unplugged

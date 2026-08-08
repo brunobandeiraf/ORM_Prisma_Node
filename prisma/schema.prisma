@@ -4,40 +4,9 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
-
-// model Modules {
-//   id          String   @id @default(uuid())
-//   name        String   @unique
-//   description String
-//   created_at  DateTime @default(now())
-
-//   @@map("modules")
-// }
-
-// model Courses {
-//   id          String   @id @default(uuid())
-//   name        String   @unique
-//   description String?
-//   duration    Int
-//   created_at  DateTime @default(now())
-
-//   teacher       Teachers @relation(fields: [fk_id_teacher], references: [id])
-//   fk_id_teacher String   @unique
-
-//   @@map("courses")
-// }
-
-// model Teachers {
-//   id   String @id @default(uuid())
-//   name String @unique
-
-//   course Courses?
-
-//   @@map("teachers")
-// }
 
 model Courses {
   id          String           @id @default(uuid())
@@ -45,9 +14,22 @@ model Courses {
   description String?
   duration    Int
   created_at  DateTime         @default(now())
+
+  teacher       Teachers? @relation(fields: [fk_id_teacher], references: [id])
+  fk_id_teacher String?   @unique
+
   modules     CoursesModules[]
 
   @@map("courses")
+}
+
+model Teachers {
+  id   String @id @default(uuid())
+  name String @unique
+
+  course Courses?
+
+  @@map("teachers")
 }
 
 model Modules {
@@ -55,7 +37,7 @@ model Modules {
   name        String           @unique
   description String
   created_at  DateTime         @default(now())
-  
+
   courses     CoursesModules[]
 
   @@map("modules")
@@ -63,24 +45,22 @@ model Modules {
 
 model CoursesModules {
   id           String   @id @default(uuid())
-  
+
   // chave estrangeira de Courses
   course       Courses  @relation(fields: [fk_id_course], references: [id])
   fk_id_course String
-  
+
   // chave estrangeira de modules
   module       Modules  @relation(fields: [fk_id_module], references: [id])
   fk_id_module String
-  
+
   created_at   DateTime @default(now())
 
   @@map("courses_modules")
 }
 
-
-
 model Authors {
-  id  String @id @default(uuid())
+  id   String @id @default(uuid())
   name String @unique
 
   Books Books[]
@@ -89,11 +69,11 @@ model Authors {
 }
 
 model Books {
-  id  String @id @default(uuid())
+  id   String @id @default(uuid())
   name String @unique
 
   author_id String
-  author  Authors @relation(fields: [author_id], references: [id])
+  author    Authors @relation(fields: [author_id], references: [id])
 
   @@map("books")
 }

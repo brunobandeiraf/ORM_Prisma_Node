@@ -1,6 +1,18 @@
 {
+  "name": "orm-prisma-node",
+  "version": "1.0.0",
+  "description": "Projeto de demonstração do ORM Prisma com Node.js",
+  "scripts": {
+    "dev": "ts-node",
+    "migrate": "npx prisma migrate dev",
+    "generate": "npx prisma generate",
+    "studio": "npx prisma studio"
+  },
   "devDependencies": {
-    "prisma": "^5.4.2"
+    "prisma": "^5.4.2",
+    "typescript": "^5.2.2",
+    "ts-node": "^10.9.1",
+    "@types/node": "^20.8.7"
   },
   "dependencies": {
     "@prisma/client": "^5.4.2"
